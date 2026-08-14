@@ -711,6 +711,7 @@ langMenu.appendChild(b);
 langBtn.onclick=()=>{const open=langMenu.classList.toggle('open');langBtn.setAttribute('aria-expanded',open)};
 document.addEventListener('click',e=>{if(!e.target.closest('.lang-dropdown')){langMenu.classList.remove('open');langBtn.setAttribute('aria-expanded','false')}});
 
+const HERO_IMGS={he:['new-hero.jpeg',1402,820],en:['new-hero-en.jpeg',1672,941],de:['new-hero-de.jpeg',1638,960],es:['new-hero-es.jpeg',1638,960],fr:['new-hero-fr.jpeg',1672,941],el:['new-hero-el.jpeg',1639,960],it:['new-hero-it.jpeg',1672,941],ru:['new-hero-ru.jpeg',1672,941],pt:['new-hero-pt.jpeg',1638,960],ja:['new-hero-ja.jpeg',1672,941],ar:['new-hero-ar.jpeg',1640,959],zh:['new-hero-zh.jpeg',1639,960],nl:['new-hero-nl.jpeg',1638,960]};
 function switchLang(code){
 const lang=LANGS.find(l=>l.code===code);if(!lang)return;
 curLang=code;
@@ -726,6 +727,7 @@ document.documentElement.lang=code;
 if(code==='he'||code==='ar')document.body.style.fontFamily="'Rubik',sans-serif";
 else if(code==='ja'||code==='zh'||code==='el')document.body.style.fontFamily="system-ui,sans-serif";
 else document.body.style.fontFamily="'Inter','Rubik',sans-serif";
+const heroData=HERO_IMGS[code]||HERO_IMGS.en;const heroImg=document.querySelector('.hero-photo');if(heroImg){heroImg.src=heroData[0];heroImg.width=heroData[1];heroImg.height=heroData[2];}
 langLabel.textContent=lang.name;
 document.querySelectorAll('.lang-opt').forEach((b,i)=>{b.classList.toggle('active',LANGS[i].code===code)});
 document.querySelectorAll('.payment-note').forEach(el=>{el.style.display=code==='he'?'none':'block'});
