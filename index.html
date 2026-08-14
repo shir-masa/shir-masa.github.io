@@ -158,18 +158,6 @@ h3{font-size:clamp(18px,2.5vw,24px);font-weight:600;line-height:1.3}
 .gallery-text h2{color:var(--black);margin-bottom:20px}
 .gallery-text p{color:var(--text-secondary);margin-bottom:14px}
 
-/* POSTER SHOWCASE */
-.poster-section{background:var(--gold-light)}
-.poster-showcase{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:500px;margin:0 auto}
-.poster-img{width:100%;border:var(--border);box-shadow:var(--shadow);transition:transform .3s;cursor:pointer}
-.poster-img:hover{transform:scale(1.02)}
-.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:20px}
-.lightbox.active{display:flex}
-.lightbox img{max-width:90vw;max-height:80vh;object-fit:contain;border:3px solid #fff;box-shadow:0 0 40px rgba(0,0,0,.5)}
-.lightbox-controls{display:flex;gap:12px}
-.lightbox-btn{background:var(--gold);color:var(--black);border:none;padding:10px 20px;font-family:'Heebo',sans-serif;font-weight:700;font-size:14px;cursor:pointer;border:2px solid #fff}
-.lightbox-btn:hover{background:var(--gold-dark);color:#fff}
-.lightbox-close{position:absolute;top:20px;right:20px;background:none;border:none;color:#fff;font-size:36px;cursor:pointer;line-height:1;padding:8px}
 
 .counter-digit{display:inline-block;overflow:hidden;height:1.15em;vertical-align:bottom;width:.65em}
 .digit-strip{display:flex;flex-direction:column}
@@ -301,7 +289,7 @@ footer{background:var(--black);text-align:center;padding:40px 24px}
 .about-grid{grid-template-columns:1fr}.about-photo{max-height:300px;width:100%}
 .gallery-inner{grid-template-columns:1fr}.gallery-photo{height:300px;order:-1}
 .transform-steps{grid-template-columns:1fr}.pain-items{grid-template-columns:1fr}
-.notforyou-grid{grid-template-columns:1fr}.poster-showcase{grid-template-columns:1fr;max-width:240px}
+.notforyou-grid{grid-template-columns:1fr}
 .testimonials-grid{grid-template-columns:1fr}.examples-grid{grid-template-columns:1fr;max-width:400px}
 }
 @media(max-width:768px){.sticky-cta{display:block}footer{padding-bottom:70px}}
@@ -506,16 +494,6 @@ footer{background:var(--black);text-align:center;padding:40px 24px}
   </div>
 </section>
 
-<hr class="section-sep" aria-hidden="true">
-<!-- POSTER SHOWCASE -->
-<section class="poster-section">
-  <div class="section-inner">
-    <div class="poster-showcase fade-in">
-      <img src="poster-hero.jpeg" alt="שיר מסע — פוסטר" class="poster-img poster-main" loading="lazy" width="1024" height="1536">
-      <img src="poster-secondary.jpeg" alt="רילוקיישן לגן עדן" class="poster-img poster-second" loading="lazy" width="1024" height="1536">
-    </div>
-  </div>
-</section>
 
 <hr class="section-sep" aria-hidden="true">
 <!-- LANGUAGES -->
@@ -669,14 +647,6 @@ footer{background:var(--black);text-align:center;padding:40px 24px}
 
 </main>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Poster view">
-  <button class="lightbox-close" aria-label="Close">&times;</button>
-  <img src="" alt="" id="lightboxImg">
-  <div class="lightbox-controls">
-    <a class="lightbox-btn" id="lightboxSave" href="" download>&#8681; Save</a>
-  </div>
-</div>
 
 <!-- FOOTER -->
 <footer role="contentinfo">
@@ -753,10 +723,6 @@ else if(T.en&&T.en[key]!=null)el.textContent=T.en[key];
 const isRTL=!!lang.rtl;
 document.documentElement.dir=isRTL?'rtl':'ltr';
 document.documentElement.lang=code;
-const POSTERS={he:['poster-hero.jpeg','poster-secondary.jpeg'],en:['poster-hero-en.jpeg','poster-secondary-en.jpeg']};
-const p=POSTERS[code]||POSTERS.en;
-const pm=document.querySelector('.poster-main');if(pm)pm.src=p[0];
-const ps=document.querySelector('.poster-second');if(ps)ps.src=p[1]||p[0];
 if(code==='he'||code==='ar')document.body.style.fontFamily="'Rubik',sans-serif";
 else if(code==='ja'||code==='zh'||code==='el')document.body.style.fontFamily="system-ui,sans-serif";
 else document.body.style.fontFamily="'Inter','Rubik',sans-serif";
@@ -785,22 +751,6 @@ if(stickyCta&&heroCta){
 new IntersectionObserver(([e])=>{stickyCta.classList.toggle('visible',!e.isIntersecting)},{threshold:0}).observe(heroCta);
 }
 
-/* Lightbox for posters */
-const lightbox=document.getElementById('lightbox');
-const lightboxImg=document.getElementById('lightboxImg');
-const lightboxSave=document.getElementById('lightboxSave');
-document.querySelectorAll('.poster-section .poster-img').forEach(img=>{
-img.addEventListener('click',()=>{
-lightboxImg.src=img.src;lightboxImg.alt=img.alt;
-lightboxSave.href=img.src;lightboxSave.download=img.src.split('/').pop();
-lightbox.classList.add('active');document.body.style.overflow='hidden';
-});
-});
-lightbox.querySelector('.lightbox-close').addEventListener('click',()=>{
-lightbox.classList.remove('active');document.body.style.overflow='';
-});
-lightbox.addEventListener('click',(e)=>{if(e.target===lightbox){lightbox.classList.remove('active');document.body.style.overflow='';}});
-document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&lightbox.classList.contains('active')){lightbox.classList.remove('active');document.body.style.overflow='';}});
 
 /* Song Form */
 const songForm=document.getElementById('songForm');
