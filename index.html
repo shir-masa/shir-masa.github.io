@@ -218,6 +218,8 @@ h3{font-size:clamp(18px,2.5vw,24px);font-weight:600;line-height:1.3}
 .form-group .form-hint{font-size:12px;color:#888;font-weight:400}
 .form-group input,.form-group select,.form-group textarea{background:#1a1a1a;border:2px solid #333;color:#fff;font-family:inherit;font-size:16px;padding:12px 14px;border-radius:0;transition:border-color .2s}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--tiffany);outline:none}
+.form-group input[type="date"]{color-scheme:dark}
+.form-group input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(1);cursor:pointer;padding:4px}
 .form-group textarea{resize:vertical;min-height:100px}
 .form-group select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;padding-left:36px}
 [dir="rtl"] .form-group select{background-position:left 14px center;padding-left:36px;padding-right:14px}
