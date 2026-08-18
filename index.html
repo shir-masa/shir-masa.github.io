@@ -749,6 +749,10 @@ const ld=document.getElementById('langsDisplay');
 if(ld){const names={he:'עברית',en:'English',de:'Deutsch',fr:'Français',es:'Español',pt:'Português',it:'Italiano',ru:'Русский',ja:'日本語',ar:'العربية',zh:'中文',nl:'Nederlands',el:'Ελληνικά'};const all=Object.keys(names);let ordered;if(code==='he'){ordered=all;}else{ordered=[code,...all.filter(c=>c!==code&&c!=='he'),'he'];}ld.innerHTML=ordered.map(c=>'<em>'+names[c]+'</em>').join(' · ');}
 }
 
+/* Auto-detect browser language */
+const bl=(navigator.language||'').slice(0,2).toLowerCase();
+if(bl&&bl!=='he'){const supported=LANGS.find(l=>l.code===bl);switchLang(supported?bl:'en');}
+
 /* Fade-in: progressive enhancement */
 document.documentElement.classList.add('js-ready');
 const fadeObserver=new IntersectionObserver((entries)=>{
